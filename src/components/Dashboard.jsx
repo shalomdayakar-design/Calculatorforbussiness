@@ -157,13 +157,15 @@ export default function Dashboard({ lang = 'te', setActiveNav, onOpenExamples })
           </div>
         </div>
 
-        <button
-          onClick={onOpenExamples}
-          className="skeuo-btn skeuo-btn-amber text-xs sm:text-sm py-2.5 px-4 gap-2 w-full md:w-auto"
-        >
-          <Sliders className="w-4 h-4" />
-          <span>{t.examples}</span>
-        </button>
+        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+          <button
+            onClick={onOpenExamples}
+            className="skeuo-btn skeuo-btn-neutral text-xs sm:text-sm py-2.5 px-4 gap-2 flex-1 md:flex-initial"
+          >
+            <Sliders className="w-4 h-4 text-amber-400" />
+            <span>{t.examples}</span>
+          </button>
+        </div>
       </div>
 
       {/* Grid of Calculators */}

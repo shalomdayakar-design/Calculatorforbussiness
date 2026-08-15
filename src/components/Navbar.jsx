@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Sun, Moon, Download, History, Calculator, Smartphone, X } from 'lucide-react';
+import { Globe, Sun, Moon, Download, History, Calculator, Smartphone, Settings, X } from 'lucide-react';
 import { translations } from '../i18n/translations';
 
 export default function Navbar({
@@ -55,7 +55,7 @@ export default function Navbar({
 
           {/* Header Action Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {/* Clean Install App Button */}
+            {/* Install App Button */}
             <button
               onClick={handleInstallClick}
               className="skeuo-btn skeuo-btn-success text-xs py-1.5 px-3 gap-1.5 animate-pulse font-bold"
@@ -66,14 +66,23 @@ export default function Navbar({
               <span className="sm:hidden">Install App</span>
             </button>
 
+            {/* Prominent Settings Button (⚙️ సెట్టింగ్‌లు) */}
+            <button
+              onClick={onOpenSettings}
+              title={t.settings}
+              className="skeuo-btn skeuo-btn-amber text-xs py-1.5 px-2.5 sm:px-3 gap-1.5 font-bold"
+            >
+              <Settings className="w-4 h-4 text-slate-900" />
+              <span className="hidden md:inline">{t.settings}</span>
+            </button>
+
             {/* Quick Keypad Button */}
             <button
               onClick={onOpenQuickKeypad}
               title={t.quickKeypad}
-              className="skeuo-btn skeuo-btn-amber text-xs py-1.5 px-2.5 sm:px-3 gap-1.5"
+              className="skeuo-btn skeuo-btn-neutral text-xs py-1.5 px-2 sm:px-2.5"
             >
-              <Calculator className="w-4 h-4" />
-              <span className="hidden md:inline">{t.quickKeypad}</span>
+              <Calculator className="w-4 h-4 text-amber-400" />
             </button>
 
             {/* History Button */}
@@ -97,7 +106,7 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* Clean Install App Modal without links or extra text */}
+      {/* Clean Install App Modal */}
       {showInstallModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="skeuo-calculator-casing w-full max-w-md p-5 space-y-4">
