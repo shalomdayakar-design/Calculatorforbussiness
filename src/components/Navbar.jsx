@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Sun, Moon, Download, History, Calculator, Laptop, Smartphone, CheckCircle, X } from 'lucide-react';
+import { Globe, Sun, Moon, Download, History, Calculator, Laptop, Smartphone, CheckCircle, X, ExternalLink } from 'lucide-react';
 import { translations } from '../i18n/translations';
 
 export default function Navbar({
@@ -35,6 +35,10 @@ export default function Navbar({
     document.body.removeChild(link);
   };
 
+  const handleOpenPwaBuilderApk = () => {
+    window.open('https://www.pwabuilder.com', '_blank');
+  };
+
   return (
     <>
       <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur border-b border-slate-800 shadow-md">
@@ -64,15 +68,15 @@ export default function Navbar({
 
           {/* Header Action Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {/* Install / Download App Button */}
+            {/* Install APK / App Button */}
             <button
               onClick={handleInstallClick}
               className="skeuo-btn skeuo-btn-success text-xs py-1.5 px-3 gap-1.5 animate-pulse font-bold"
-              title="ఆఫ్‌లైన్ యాప్ డౌన్‌లోడ్ / డెస్క్‌టాప్‌పై ఇన్‌స్టాల్ చేయండి"
+              title="Android APK / డెస్క్‌టాప్ యాప్‌ను ఇన్‌స్టాల్ చేయండి"
             >
               <Download className="w-4 h-4 text-emerald-300" />
-              <span className="hidden sm:inline">ఆఫ్‌లైన్ యాప్ డౌన్‌లోడ్ / Install App</span>
-              <span className="sm:hidden">Install</span>
+              <span className="hidden sm:inline">APK / యాప్ ఇన్‌స్టాల్ చేయండి (Install APK)</span>
+              <span className="sm:hidden">APK</span>
             </button>
 
             {/* Quick Keypad Button */}
@@ -106,15 +110,15 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* Standalone Offline App Download & Install Modal */}
+      {/* Standalone Android APK & Offline App Install Modal */}
       {showInstallModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="skeuo-calculator-casing w-full max-w-lg p-5 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2">
-                <Download className="w-5 h-5 text-emerald-400" />
+                <Smartphone className="w-5 h-5 text-emerald-400" />
                 <h3 className="font-extrabold text-base text-slate-100 font-mono">
-                  ఆఫ్‌లైన్ యాప్ డౌన్‌లోడ్ & ఇన్‌స్టాల్ (Offline App)
+                  Android APK & ఆఫ్‌లైన్ యాప్ ఇన్‌స్టాల్ (Install APK)
                 </h3>
               </div>
               <button onClick={() => setShowInstallModal(false)} className="text-slate-400 hover:text-slate-200">
@@ -123,37 +127,46 @@ export default function Navbar({
             </div>
 
             <p className="text-xs text-slate-300 leading-relaxed">
-              ఈ అప్లికేషన్‌ను మీరు మీ కంప్యూటర్ లేదా మొబైల్‌లో పూర్తిగా ఆఫ్‌లైన్‌లో వాడుకోవచ్చు:
+              మీ Android మొబైల్ లేదా Windows PC లలో యాప్‌ను ఇన్‌స్టాల్ చేయడానికి మార్గాలు:
             </p>
 
             <div className="space-y-3 text-xs">
-              {/* Option A: Direct Zip Package Download */}
+              {/* Option A: Android APK Installation */}
               <div className="bg-slate-900/90 border border-emerald-500/50 p-4 rounded-xl space-y-2">
                 <div className="flex items-center gap-2 font-bold text-emerald-400 font-mono text-sm">
-                  <CheckCircle className="w-5 h-5 text-emerald-400" />
-                  <span>1. ఆఫ్‌లైన్ జిప్ ఫైల్ డౌన్‌లోడ్ చేయండి:</span>
+                  <Smartphone className="w-5 h-5 text-emerald-400" />
+                  <span>1. Android APK గా ఇన్‌స్టాల్ చేయడం (WebAPK):</span>
                 </div>
-                <p className="text-slate-300">
-                  ఈ ఫైల్‌ను డౌన్‌లోడ్ చేసి అన్‌జిప్ చేయండి. ఇంటర్నెట్ లేదా ఏమీ అవసరం లేకుండా ఎప్పుడైనా ఉచితంగా వాడుకోవచ్చు.
+                <p className="text-slate-300 leading-relaxed">
+                  మొబైల్ Chrome బ్రౌజర్‌లో <strong>⋮ (మూడు చుక్కలు) → "Add to Home screen" / "Install app"</strong> క్లిక్ చేయండి. Chrome ఆటోమేటిక్‌గా ఒక నిమిషంలో <strong>Android APK</strong> ని క్రియేట్ చేసి ఫోన్‌లో ఇన్‌స్టాల్ చేస్తుంది!
+                </p>
+                <div className="pt-1">
+                  <button
+                    onClick={handleOpenPwaBuilderApk}
+                    className="skeuo-btn skeuo-btn-amber w-full py-2 text-xs font-mono font-bold gap-2"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>PWABuilder ద్వారా సైన్డ్ APK క్రియేట్ చేయండి (PWABuilder APK Generator)</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Option B: Windows PC Desktop App */}
+              <div className="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl space-y-1.5">
+                <div className="flex items-center gap-2 font-bold text-sky-400 font-mono text-sm">
+                  <Laptop className="w-4 h-4" />
+                  <span>2. PC / Laptop ఆఫ్‌లైన్ జిప్ ప్యాకేజ్ (ZIP):</span>
+                </div>
+                <p className="text-slate-300 leading-relaxed">
+                  ఆఫ్‌లైన్‌లో వాడటానికి జిప్ ప్యాకేజ్‌ను ఉచితంగా డౌన్‌లోడ్ చేయండి.
                 </p>
                 <button
                   onClick={handleDirectDownloadZip}
-                  className="skeuo-btn skeuo-btn-success w-full py-2.5 text-xs font-mono font-bold gap-2 mt-1"
+                  className="skeuo-btn skeuo-btn-success w-full py-2 text-xs font-mono font-bold gap-2 mt-1"
                 >
                   <Download className="w-4 h-4" />
-                  <span>ఆఫ్‌లైన్ జిప్ ప్యాకేజ్ డౌన్‌లోడ్ చేయండి (Download ZIP)</span>
+                  <span>ఆఫ్‌లైన్ ZIP ప్యాకేజ్ డౌన్‌లోడ్ చేయండి</span>
                 </button>
-              </div>
-
-              {/* Option B: PWA Desktop App */}
-              <div className="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl space-y-1.5">
-                <div className="flex items-center gap-2 font-bold text-amber-400 font-mono text-sm">
-                  <Laptop className="w-4 h-4" />
-                  <span>2. Windows Desktop ఐకాన్‌గా ఇన్‌స్టాల్ చేయడం:</span>
-                </div>
-                <p className="text-slate-300 leading-relaxed">
-                  Chrome లేదా Edge బ్రౌజర్ అడ్రస్ బార్ (URL bar) కుడి చివరన ఉన్న <strong>Install App</strong> (కంప్యూటర్ ఐకాన్) క్లిక్ చేసి డెస్క్‌టాప్ షార్ట్‌కట్‌గా అమర్చుకోండి.
-                </p>
               </div>
             </div>
 

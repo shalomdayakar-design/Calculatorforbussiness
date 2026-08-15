@@ -1,0 +1,9 @@
+{
+  "appId": "com.smallbusiness.mastercalculator",
+  "appName": "Small Business Master Calculator",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}
