@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Sun, Moon, Download, History, Calculator, Laptop, Smartphone, HelpCircle, X } from 'lucide-react';
+import { Globe, Sun, Moon, Download, History, Calculator, Laptop, Smartphone, CheckCircle, X } from 'lucide-react';
 import { translations } from '../i18n/translations';
 
 export default function Navbar({
@@ -16,14 +16,23 @@ export default function Navbar({
   setActiveNav
 }) {
   const t = translations[lang] || translations.te;
-  const [showInstallGuideModal, setShowInstallGuideModal] = useState(false);
+  const [showInstallModal, setShowInstallModal] = useState(false);
 
   const handleInstallClick = () => {
     if (pwaInstallPrompt) {
       onInstallPwa();
     } else {
-      setShowInstallGuideModal(true);
+      setShowInstallModal(true);
     }
+  };
+
+  const handleDirectDownloadZip = () => {
+    const link = document.createElement('a');
+    link.href = '/Small-Business-Master-Calculator-Offline.zip';
+    link.download = 'Small-Business-Master-Calculator-Offline.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -55,14 +64,14 @@ export default function Navbar({
 
           {/* Header Action Controls */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            {/* Always Visible Install Desktop App Button */}
+            {/* Install / Download App Button */}
             <button
               onClick={handleInstallClick}
               className="skeuo-btn skeuo-btn-success text-xs py-1.5 px-3 gap-1.5 animate-pulse font-bold"
-              title="డెస్క్‌టాప్/మొబైల్‌లో యాప్ ఇన్‌స్టాల్ చేయండి"
+              title="ఆఫ్‌లైన్ యాప్ డౌన్‌లోడ్ / డెస్క్‌టాప్‌పై ఇన్‌స్టాల్ చేయండి"
             >
               <Download className="w-4 h-4 text-emerald-300" />
-              <span className="hidden sm:inline">యాప్ ఇన్‌స్టాల్ చేయండి (Install App)</span>
+              <span className="hidden sm:inline">ఆఫ్‌లైన్ యాప్ డౌన్‌లోడ్ / Install App</span>
               <span className="sm:hidden">Install</span>
             </button>
 
@@ -85,12 +94,6 @@ export default function Navbar({
               <History className="w-4 h-4 text-sky-400" />
             </button>
 
-            {/* Telugu Language Badge */}
-            <div className="hidden lg:flex items-center bg-emerald-950/80 border border-emerald-800 rounded-lg px-2.5 py-1 text-xs font-bold text-emerald-300">
-              <Globe className="w-3.5 h-3.5 mr-1 text-emerald-400" />
-              <span>తెలుగు</span>
-            </div>
-
             {/* Theme Switcher */}
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -103,53 +106,62 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* Standalone Desktop & Mobile App Install Guide Modal */}
-      {showInstallGuideModal && (
+      {/* Standalone Offline App Download & Install Modal */}
+      {showInstallModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="skeuo-calculator-casing w-full max-w-lg p-5 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2">
                 <Download className="w-5 h-5 text-emerald-400" />
                 <h3 className="font-extrabold text-base text-slate-100 font-mono">
-                  యాప్ ఇన్‌స్టాల్ గైడ్ (Install App)
+                  ఆఫ్‌లైన్ యాప్ డౌన్‌లోడ్ & ఇన్‌స్టాల్ (Offline App)
                 </h3>
               </div>
-              <button onClick={() => setShowInstallGuideModal(false)} className="text-slate-400 hover:text-slate-200">
+              <button onClick={() => setShowInstallModal(false)} className="text-slate-400 hover:text-slate-200">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
+            <p className="text-xs text-slate-300 leading-relaxed">
+              ఈ అప్లికేషన్‌ను మీరు మీ కంప్యూటర్ లేదా మొబైల్‌లో పూర్తిగా ఆఫ్‌లైన్‌లో వాడుకోవచ్చు:
+            </p>
+
             <div className="space-y-3 text-xs">
-              <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              {/* Option A: Direct Zip Package Download */}
+              <div className="bg-slate-900/90 border border-emerald-500/50 p-4 rounded-xl space-y-2">
                 <div className="flex items-center gap-2 font-bold text-emerald-400 font-mono text-sm">
-                  <Laptop className="w-4 h-4" />
-                  <span>1. Windows Desktop / PC లో ఇన్‌స్టాల్ చేయడం:</span>
+                  <CheckCircle className="w-5 h-5 text-emerald-400" />
+                  <span>1. ఆఫ్‌లైన్ జిప్ ఫైల్ డౌన్‌లోడ్ చేయండి:</span>
                 </div>
-                <p className="text-slate-300 leading-relaxed">
-                  Chrome లేదా Edge బ్రౌజర్ అడ్రస్ బార్ (URL bar) కుడి చివరన ఉన్న <strong>Install App</strong> ఐకాన్ (కంప్యూటర్ & డౌన్ యారో) పై క్లిక్ చేయండి. లేదా బ్రౌజర్ కుడి మూలన ఉన్న <strong>⋮ (మూడు చుక్కలు) → Save and share → Install App</strong> నొక్కండి.
+                <p className="text-slate-300">
+                  ఈ ఫైల్‌ను డౌన్‌లోడ్ చేసి అన్‌జిప్ చేయండి. ఇంటర్నెట్ లేదా ఏమీ అవసరం లేకుండా ఎప్పుడైనా ఉచితంగా వాడుకోవచ్చు.
                 </p>
+                <button
+                  onClick={handleDirectDownloadZip}
+                  className="skeuo-btn skeuo-btn-success w-full py-2.5 text-xs font-mono font-bold gap-2 mt-1"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>ఆఫ్‌లైన్ జిప్ ప్యాకేజ్ డౌన్‌లోడ్ చేయండి (Download ZIP)</span>
+                </button>
               </div>
 
-              <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl space-y-1.5">
+              {/* Option B: PWA Desktop App */}
+              <div className="bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl space-y-1.5">
                 <div className="flex items-center gap-2 font-bold text-amber-400 font-mono text-sm">
-                  <Smartphone className="w-4 h-4" />
-                  <span>2. Android / Mobile లో ఇన్‌స్టాల్ చేయడం:</span>
+                  <Laptop className="w-4 h-4" />
+                  <span>2. Windows Desktop ఐకాన్‌గా ఇన్‌స్టాల్ చేయడం:</span>
                 </div>
                 <p className="text-slate-300 leading-relaxed">
-                  మొబైల్ బ్రౌజర్‌లో కుడి మూలన ఉన్న <strong>⋮ (మూడు చుక్కలు)</strong> నొక్కి, <strong>"Add to Home Screen"</strong> లేదా <strong>"Install App"</strong> పై క్లిక్ చేయండి.
+                  Chrome లేదా Edge బ్రౌజర్ అడ్రస్ బార్ (URL bar) కుడి చివరన ఉన్న <strong>Install App</strong> (కంప్యూటర్ ఐకాన్) క్లిక్ చేసి డెస్క్‌టాప్ షార్ట్‌కట్‌గా అమర్చుకోండి.
                 </p>
-              </div>
-
-              <div className="bg-emerald-950/80 border border-emerald-800 p-3 rounded-xl text-emerald-300 font-mono text-[11px]">
-                ✔ ఇన్‌స్టాల్ అయిన తర్వాత మీ డెస్క్‌టాప్‌పై స్వంత ఐకాన్‌తో ఆఫ్‌లైన్‌లో నేరుగా పనిచేస్తుంది!
               </div>
             </div>
 
             <button
-              onClick={() => setShowInstallGuideModal(false)}
-              className="skeuo-btn skeuo-btn-success w-full py-2.5 text-xs font-mono font-bold"
+              onClick={() => setShowInstallModal(false)}
+              className="skeuo-btn skeuo-btn-neutral w-full py-2 text-xs font-mono font-bold"
             >
-              సరే (Got It)
+              మూసివేయి (Close)
             </button>
           </div>
         </div>
