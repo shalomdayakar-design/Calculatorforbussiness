@@ -25,8 +25,7 @@ import { ArrowLeft } from 'lucide-react';
 
 export default function App() {
   const [settings, setSettings] = useState(getSettings());
-  const [lang, setLang] = useState(settings.language || 'te');
-  const [theme, setTheme] = useState(settings.theme || 'dark');
+  const [lang, setLang] = useState('te');
   const [activeNav, setActiveNav] = useState('dashboard');
 
   // Modals state
@@ -78,18 +77,11 @@ export default function App() {
   const t = translations[lang] || translations.te;
 
   return (
-    <div className={`min-h-screen ${theme === 'light' ? 'theme-light text-slate-900' : 'text-slate-100'} ${settings.compactMode ? 'compact-layout' : ''}`}>
+    <div className={`min-h-screen text-slate-100 ${settings.compactMode ? 'compact-layout' : ''}`}>
       {/* Top Navbar */}
       <Navbar
         lang={lang}
         setLang={handleSetLang}
-        theme={theme}
-        setTheme={(newTheme) => {
-          setTheme(newTheme);
-          const updated = { ...settings, theme: newTheme };
-          setSettings(updated);
-          saveSettings(updated);
-        }}
         onOpenQuickKeypad={() => setIsQuickKeypadOpen(true)}
         onOpenHistory={() => setIsHistoryOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}

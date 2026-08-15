@@ -4,14 +4,13 @@
 
 const HISTORY_KEY = 'sb_master_calc_history';
 const SETTINGS_KEY = 'sb_master_calc_settings';
-const DAILY_RECORDS_KEY = 'sb_master_calc_daily';
 
 export const defaultSettings = {
   currency: '₹',
   decimals: 2,
   language: 'te',
-  theme: 'dark', // dark | light
-  compactMode: false, // High density compact view for all devices
+  theme: 'dark', // Fixed dark theme only
+  compactMode: false,
   soundEnabled: true,
   customLandFactors: {
     centToSqFt: 435.6,
@@ -23,7 +22,7 @@ export const defaultSettings = {
 export const getSettings = () => {
   try {
     const data = localStorage.getItem(SETTINGS_KEY);
-    return data ? { ...defaultSettings, ...JSON.parse(data) } : defaultSettings;
+    return data ? { ...defaultSettings, ...JSON.parse(data), theme: 'dark' } : defaultSettings;
   } catch (e) {
     return defaultSettings;
   }
@@ -31,7 +30,7 @@ export const getSettings = () => {
 
 export const saveSettings = (settingsObj) => {
   try {
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settingsObj));
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify({ ...settingsObj, theme: 'dark' }));
   } catch (e) {
     console.error('Failed to save settings:', e);
   }

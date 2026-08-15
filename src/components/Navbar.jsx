@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { Globe, Sun, Moon, Download, History, Calculator, Smartphone, Settings, X } from 'lucide-react';
+import { Download, History, Calculator, Smartphone, Settings, X } from 'lucide-react';
 import { translations } from '../i18n/translations';
 
 export default function Navbar({
   lang = 'te',
-  setLang,
-  theme,
-  setTheme,
   onOpenQuickKeypad,
   onOpenHistory,
   onOpenSettings,
@@ -43,7 +40,7 @@ export default function Navbar({
             <div>
               <h1 className="font-extrabold text-sm sm:text-lg leading-tight tracking-tight text-slate-100 flex items-center gap-1.5 font-mono">
                 <span>{t.appTitle}</span>
-                <span className="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-1.5 py-0.5 rounded">
+                <span className="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-1.5 py-0.5 rounded font-mono">
                   తెలుగు
                 </span>
               </h1>
@@ -92,15 +89,6 @@ export default function Navbar({
               className="skeuo-btn skeuo-btn-neutral text-xs py-1.5 px-2 sm:px-2.5"
             >
               <History className="w-4 h-4 text-sky-400" />
-            </button>
-
-            {/* Theme Switcher */}
-            <button
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="skeuo-btn skeuo-btn-neutral text-xs p-1.5 sm:p-2"
-              title={t.theme}
-            >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-indigo-400" />}
             </button>
           </div>
         </div>
