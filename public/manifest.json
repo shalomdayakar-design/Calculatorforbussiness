@@ -1,0 +1,28 @@
+{
+  "short_name": "Master Calc",
+  "name": "Small Business Master Calculator",
+  "description": "స్మాల్ బిజినెస్ మాస్టర్ క్యాలిక్యులేటర్ - Offline Standalone Web & Desktop Application",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0c1322",
+  "background_color": "#0c1322",
+  "orientation": "any"
+}
