@@ -63,6 +63,47 @@
   }
 }
 
+/* Ultra-Compact High-Density Mobile Phone Layout Rules */
+@media (max-width: 640px) {
+  body {
+    font-size: 13px !important;
+  }
+
+  .skeuo-calculator-casing {
+    padding: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .skeuo-lcd-display {
+    padding: 0.5rem 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .skeuo-lcd-text {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .skeuo-input {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 0.5rem !important;
+  }
+
+  label {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .skeuo-btn {
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+    font-size: 0.75rem !important;
+    border-radius: 0.5rem !important;
+  }
+}
+
 /* Compact High-Density Mode for All Devices (Mobile, Tablet, Desktop) */
 .compact-layout .skeuo-calculator-casing {
   padding: 0.75rem !important;
