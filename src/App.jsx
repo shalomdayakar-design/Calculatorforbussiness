@@ -78,7 +78,7 @@ export default function App() {
   const t = translations[lang] || translations.te;
 
   return (
-    <div className={`min-h-screen ${theme === 'light' ? 'theme-light text-slate-900' : 'text-slate-100'}`}>
+    <div className={`min-h-screen ${theme === 'light' ? 'theme-light text-slate-900' : 'text-slate-100'} ${settings.compactMode ? 'compact-layout' : ''}`}>
       {/* Top Navbar */}
       <Navbar
         lang={lang}

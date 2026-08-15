@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, X, Save } from 'lucide-react';
+import { Settings, X, Save, Maximize2, Minimize2 } from 'lucide-react';
 import { saveSettings } from '../utils/storage';
 
 export default function SettingsView({
@@ -10,6 +10,7 @@ export default function SettingsView({
 }) {
   const [currency, setCurrency] = useState(settings.currency || '₹');
   const [decimals, setDecimals] = useState(settings.decimals || 2);
+  const [compactMode, setCompactMode] = useState(settings.compactMode || false);
   const [centToSqFt, setCentToSqFt] = useState(settings.customLandFactors?.centToSqFt || 435.6);
   const [gunthaToSqFt, setGunthaToSqFt] = useState(settings.customLandFactors?.gunthaToSqFt || 1089);
 
@@ -21,6 +22,7 @@ export default function SettingsView({
       currency,
       language: 'te',
       decimals: Number(decimals),
+      compactMode,
       customLandFactors: {
         centToSqFt: Number(centToSqFt),
         gunthaToSqFt: Number(gunthaToSqFt),
@@ -39,7 +41,7 @@ export default function SettingsView({
           <div className="flex items-center gap-2">
             <Settings className="w-5 h-5 text-emerald-400" />
             <h3 className="font-extrabold text-base text-slate-100 font-mono">
-              యాప్ సెట్టింగ్‌లు (తెలుగు)
+              యాప్ సెట్టింగ్‌లు (Settings)
             </h3>
           </div>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-200">
@@ -48,6 +50,32 @@ export default function SettingsView({
         </div>
 
         <div className="space-y-3">
+          {/* Compact View Mode Toggle for All Devices */}
+          <div className="bg-slate-900/90 border border-slate-800 p-3 rounded-xl flex items-center justify-between">
+            <div className="space-y-0.5">
+              <div className="text-xs font-mono font-bold text-slate-100 flex items-center gap-1.5">
+                {compactMode ? <Minimize2 className="w-4 h-4 text-emerald-400" /> : <Maximize2 className="w-4 h-4 text-amber-400" />}
+                <span>కాంపాక్ట్ వ్యూ (Compact Mode for All Devices)</span>
+              </div>
+              <p className="text-[10px] text-slate-400">
+                మొబైల్, టాబ్లెట్ & డెస్క్‌టాప్ అన్నిటిలో స్క్రీన్ స్పేస్ ఆదా చేసేలా లేఅవుట్ మార్చుతుంది.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCompactMode(!compactMode)}
+              className={`w-12 h-6 rounded-full transition-colors p-1 border ${
+                compactMode ? 'bg-emerald-600 border-emerald-400' : 'bg-slate-800 border-slate-700'
+              }`}
+            >
+              <div
+                className={`w-4 h-4 rounded-full bg-white transition-transform ${
+                  compactMode ? 'translate-x-6' : 'translate-x-0'
+                }`}
+              />
+            </button>
+          </div>
+
           <div>
             <label className="block text-xs font-mono font-bold text-slate-300 uppercase mb-1">
               కరెన్సీ గుర్తు (Currency Symbol)
